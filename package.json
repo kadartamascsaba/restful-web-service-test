@@ -1,0 +1,12 @@
+{
+    "name": "restful-web-service-test",
+    "version": "0.1",
+    "private": true,
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "body-parser": "~1.12.4",
+        "express": "~4.12.4"
+    }
+}
