@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+<h1>Demo website</h1>
+
+<main>
+
+    Message from Server:
+    <span id="message_from_server"></span>
+    <br>
+    <br>
+    <input type="button" name="getButton" value="List users (GET)" onclick="myGetFunc()">
+    <br>
+    <br>
+    ID: <input type="text" id="idField">
+    <br>
+    Name: <input type="text" id="nameField">
+    <br>
+    <input type="button" name="putButton" value="Add user (PUT)" onclick="myPutFunc()"><input type="button" name="postButton" value="Modify user (POST)" onclick="myPostFunc()"><input type="button" name="deleteButton" value="Delete user (DELETE)" onclick="myDeleteFunc()">
+
+</main>
+
+    <script>
+        function myGetFunc() {
+            $.ajax({
+                url: 'http://localhost:8080/api/users',
+                type: 'GET',
+                dataType: 'json'
+            }).done(function(data) {
+                $('#message_from_server').text(JSON.stringify(data));
+            }).fail(function() {
+                alert("ERROR: AddJAX failed")
+            })
+        }
+
+        function myPostFunc() {
+            user = JSON.parse(' { "name" : "' + $("#nameField").val() + '", "id": ' + $('#idField').val() + ' } ');
+            $.ajax({
+                url: 'http://localhost:8080/api/users/' + $('#idField').val(),
+                type: 'POST',
+                dataType: 'json',
+                data: user
+            }).done(function(data) {
+                $('#message_from_server').text(JSON.stringify(data));
+            }).fail(function() {
+                alert("ERROR: AddJAX failed")
+            })
+        }
+
+        function myPutFunc() {
+            user = JSON.parse('{ "name" : "' + $("#nameField").val() + '", "id": ' + $('#idField').val() + ' } ');
+            $.ajax({
+                url: 'http://localhost:8080/api/users/' + $('#idField').val(),
+                type: 'PUT',
+                dataType: 'json',
+                data: user
+            }).done(function(data) {
+                $('#message_from_server').text(JSON.stringify(data));
+            }).fail(function() {
+                alert("ERROR: AddJAX failed")
+            })
+        }
+
+        function myDeleteFunc() {
+            $.ajax({
+                url: 'http://localhost:8080/api/users/' + $('#idField').val(),
+                type: 'DELETE',
+                dataType: 'json'
+            }).done(function(data) {
+                $('#message_from_server').text(JSON.stringify(data));
+            }).fail(function() {
+                alert("ERROR: AddJAX failed")
+            })
+        }
+    </script>
+
+</body>
+</html>
