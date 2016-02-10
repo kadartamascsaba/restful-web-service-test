@@ -118,5 +118,9 @@ app.get('/index.html', function (req, res) {
 	res.sendFile(__dirname + "/" + 'index.html');
 });
 
+app.get('/jquery-1.11.3.min.js', function (req, res) {
+	res.sendFile(__dirname + "/" + 'jquery-1.11.3.min.js');
+});
+
 app.listen(port);
 console.log('Magic happens on port ' + port);
